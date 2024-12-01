@@ -5,6 +5,7 @@
 package com.mycompany.groupproject;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -16,7 +17,10 @@ public class WarGame extends Game{
     private WarDeck deck;
     private boolean isEnd;
     private int round;
-
+    private String roundInput;
+    private String goOnInput="1";
+    private int maxRound;
+    AccountController ac= new AccountController();
     
     public WarGame(WarPlayer comp,WarPlayer player) {
         this.deck = new WarDeck();
@@ -25,13 +29,7 @@ public class WarGame extends Game{
         this.isEnd = false;
         this.round=0;
     }
-        public WarPlayer getComp() {
-        return comp;
-    }
 
-    public WarPlayer getPlayer() {
-        return player;
-    }
     public void deal(){
         deck.createFullDeck();
         deck.shuffleCard();
@@ -44,7 +42,7 @@ public class WarGame extends Game{
         WarCard playerCard = player.getPlayerDeck().remove(0);
         WarCard compCard = comp.getPlayerDeck().remove(0);
 
-        System.out.println(playerCard.getRank().getRankValue() + " VS " + compCard.getRank().getRankValue());
+        System.out.println(playerCard + " VS " + compCard);
 
         if (playerCard.getRank().getRankValue() > compCard.getRank().getRankValue()) {
             System.out.println("Player wins this round.");
@@ -125,26 +123,63 @@ public class WarGame extends Game{
 
     @Override
     public void playGame() {
-    while (!isEnd && round < 200) {
-        round++;
-        playARound();
-    }
-    if (round == 200) {
-        if (player.getPlayerDeck().size() > comp.getPlayerDeck().size()) {
-            declareWinner(player, comp);
-        } else {
-            declareWinner(comp, player);
+        System.out.println("How many rounds do you want to play in maximum?");
+        System.out.println("Non integer input implies 50 rounds.");
+        Scanner myObj = new Scanner(System.in);
+        roundInput=myObj.nextLine();
+        
+        //If non integer, then maxRound=50, else use it for maxRound
+        try {
+            maxRound = Integer.parseInt(roundInput);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Defaulting to 50 rounds.");
+            maxRound = 50;
         }
+        while (!isEnd && round < maxRound) {
+            round++;
+            if (goOnInput.equals("1")){
+            System.out.println("1.Go on, 2.Surrender, Others input means auto.");
+            goOnInput=myObj.nextLine();}
+            switch (goOnInput) {
+                // go on
+                case "1":
+                    playARound();
+                    break;
+                // surrender
+                case "2":
+                    declareWinner(comp, player);
+                    return;
+                // auto
+                default:
+                    System.out.println("Auto mode");
+                    playARound();
+                    break;
+            }}
+        if (round == maxRound) {
+            if (player.getPlayerDeck().size() > comp.getPlayerDeck().size()) {
+                declareWinner(player, comp);
+            } else {
+                declareWinner(comp, player);
+            }
+        }
+           
     }
-}
-
 
     @Override
     public void declareWinner(WarPlayer winner,WarPlayer loser) {
         System.out.println(winner+" wins.");
         this.isEnd=true;
-        winner.addScore();
-        loser.addLoss();
+        if (winner.getName().equals("computerPlayer")){
+            ac.updateResultToFile(loser, "loss");
+        }else{
+            ac.updateResultToFile(winner, "win");
+        }
     }
-    
+    public WarPlayer getComp() {
+        return comp;
+    }
+
+    public WarPlayer getPlayer() {
+        return player;
+    }
 }

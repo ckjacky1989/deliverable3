@@ -28,9 +28,6 @@ public class WarDeck extends GroupOfCard{
         }
       }
     }
-    public int getSize(ArrayList<WarCard> deck) {
-        return deck.size();
-    }
 
     public ArrayList<WarCard> getFullDeck() {
         return fullDeck;

@@ -54,7 +54,7 @@ public class WarPlayer extends Player{
         return winRate;
     }
 
-    public void setWinRate(float winRate) {
+    public void setWinRate(double winRate) {
         if(this.score+this.loss==0)
             {this.winRate=0;}else
             {this.winRate = this.score/(this.score+this.loss);}
@@ -65,5 +65,18 @@ public class WarPlayer extends Player{
     public void addLoss(){
         this.loss++;
     }    
-    
+
+    public void setLoss(int loss) {
+        this.loss = loss;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return "WarPlayer " + name;
+    }
+
 }
