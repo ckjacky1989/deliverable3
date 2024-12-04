@@ -39,6 +39,19 @@ public class WarGame extends Game{
     }
 
     public void playARound() {
+        // Check if player has at least 1 card for payARound()
+        if (player.getPlayerDeck().size() < 1) {
+            System.out.println("Player has not enough cards for the game.");
+            declareWinner(comp, player);
+            //End playARound()
+            return;
+        // Check if comp has has at least 1 card for payARound()
+        } else if (comp.getPlayerDeck().size() < 1){
+            System.out.println("Computer has not enough cards for the game.");
+            declareWinner(player, comp);
+            //End playARound()
+            return;
+        }
         WarCard playerCard = player.getPlayerDeck().remove(0);
         WarCard compCard = comp.getPlayerDeck().remove(0);
 
@@ -100,9 +113,8 @@ public class WarGame extends Game{
         // Add comp's face-up card to the pile
         warPile.add(compFaceUp);
 
-        System.out.println("Player plays: " + playerFaceUp.getRank().getRankValue());
-        System.out.println("Comp plays: " + compFaceUp.getRank().getRankValue());
-    
+        System.out.println(playerFaceUp + " VS " + compFaceUp);
+        
         // Compare the face-up cards
         if (playerFaceUp.getRank().getRankValue() > compFaceUp.getRank().getRankValue()) {
             System.out.println("Player wins the war!");
