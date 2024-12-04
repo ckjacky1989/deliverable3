@@ -14,20 +14,8 @@ import java.util.stream.Collectors;
 
 public class AccountViewer {
     AccountController ac= new AccountController();
-    public String displayNamePrompt(){
-        System.out.println("Enter name: ");
-        Scanner myObj = new Scanner(System.in);
-        String inputValue = myObj.nextLine();
-        return inputValue;
-    }
-    public String displayPasswordPrompt(){
-        System.out.println("Enter password: ");
-        Scanner myObj = new Scanner(System.in);
-        String inputValue = myObj.nextLine();
-        return inputValue;
-    }
-    public String displayPasswordConfirm(){
-        System.out.println("Enter password: ");
+    public String displayPrompt(String prompt){
+        System.out.println(prompt);
         Scanner myObj = new Scanner(System.in);
         String inputValue = myObj.nextLine();
         return inputValue;

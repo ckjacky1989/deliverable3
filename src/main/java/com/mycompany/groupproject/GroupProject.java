@@ -24,9 +24,9 @@ public class GroupProject {
             switch (startMenuAns) {
                 // Create account
                 case "1":
-                    String name = av.displayNamePrompt();
-                    String password = av.displayPasswordPrompt();
-                    String confirmedPw = av.displayPasswordConfirm();
+                    String name = av.displayPrompt("Enter name: ");
+                    String password = av.displayPrompt("Enter password: ");
+                    String confirmedPw = av.displayPrompt("Enter password again: ");
                     if (password.equals(confirmedPw)) {
                         WarPlayer newPlayer = ac.registerWarPlayer(name, password);
                         if (newPlayer != null) {
@@ -41,8 +41,8 @@ public class GroupProject {
 
                 // Login
                 case "2":
-                    name = av.displayNamePrompt();
-                    password = av.displayPasswordPrompt();
+                    name = av.displayPrompt("Enter name: ");
+                    password = av.displayPrompt("Enter password: ");
                     WarPlayer player = ac.authenticateWarPlayer(name, password);
                     if (player != null) {
                         System.out.println("Login successful. Welcome, " + player.getName());
