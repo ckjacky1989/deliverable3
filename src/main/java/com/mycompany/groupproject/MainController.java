@@ -9,12 +9,17 @@ package com.mycompany.groupproject;
  * @author ckjac
  */
 public class MainController {
-    public void menu(){
+    Viewer v = new Viewer();
+    AccountViewer av = new AccountViewer();
     AccountController ac = new AccountController();
-        Viewer v = new Viewer();
-        AccountViewer av = new AccountViewer();
-        String startMenuAns = "";
-        boolean isFinished = false;
+    String startMenuAns = "";
+    boolean isFinished = false;
+    public void menu(){
+        AccountController ac = new AccountController();
+        //Viewer v = new Viewer();
+        //AccountViewer av = new AccountViewer();
+        //String startMenuAns = "";
+        //boolean isFinished = false;
 
         while (!isFinished) {
             // Display the start menu and get the user's choice
@@ -23,19 +28,20 @@ public class MainController {
             switch (startMenuAns) {
                 // Create account
                 case "1":
-                    String name = av.displayPrompt("Enter name: ");
-                    String password = av.displayPrompt("Enter password: ");
-                    String confirmedPw = av.displayPrompt("Enter password again: ");
-                    if (password.equals(confirmedPw)) {
-                        WarPlayer newPlayer = ac.registerWarPlayer(name, password);
-                        if (newPlayer != null) {
-                            System.out.println("Account created successfully.");
-                        } else {
-                            System.out.println("Account creation failed. Player may already exist.");
-                        }
-                    } else {
-                        System.out.println("Passwords do not match.");
-                    }
+//                    String name = av.displayPrompt("Enter name: ");
+//                    String password = av.displayPrompt("Enter password: ");
+//                    String confirmedPw = av.displayPrompt("Enter password again: ");
+//                    if (password.equals(confirmedPw)) {
+//                        WarPlayer newPlayer = ac.registerWarPlayer(name, password);
+//                        if (newPlayer != null) {
+//                            System.out.println("Account created successfully.");
+//                        } else {
+//                            System.out.println("Account creation failed. Player may already exist.");
+//                        }
+//                    } else {
+//                        System.out.println("Passwords do not match.");
+//                    }
+                    createAccount();
                     break;
 
                 // Login
@@ -79,13 +85,15 @@ public class MainController {
 
                 // Read instructions
                 case "3":
-                    v.readInstruction();
+//                    v.readInstruction();
+                    gameInstruction();
                     break;
 
                 // Exit program
                 case "4":
-                    System.out.println("Thank you for using the War Game application. Goodbye!");
-                    isFinished = true;
+//                    System.out.println("Thank you for using the War Game application. Goodbye!");
+//                    isFinished = true;
+                    exitGame();
                     break;
 
                 // Invalid option in start menu
@@ -96,5 +104,31 @@ public class MainController {
     }
     
     }
+    
+    public void createAccount() {
+        String name = av.displayPrompt("Enter name: ");
+        String password = av.displayPrompt("Enter password: ");
+        String confirmedPw = av.displayPrompt("Enter password again: ");
+            if (password.equals(confirmedPw)) {
+                WarPlayer newPlayer = ac.registerWarPlayer(name, password);
+                if (newPlayer != null) {
+                    System.out.println("Account created successfully.");
+                } else {
+                    System.out.println("Account creation failed. Player may already exist.");
+                }
+            } else {
+                System.out.println("Passwords do not match.");
+            }
+    }
+    
+    public void login() {}
+    
+    public void gameInstruction() {
+        v.readInstruction();
+    }
+    
+    public void exitGame() {
+        System.out.println("Thank you for using the War Game application. Goodbye!");
+        isFinished = true;}
     
 }
