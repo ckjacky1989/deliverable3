@@ -12,10 +12,13 @@ public class MainController {
     Viewer v = new Viewer();
     AccountViewer av = new AccountViewer();
     AccountController ac = new AccountController();
-    String startMenuAns = "";
-    boolean isFinished = false;
+    String startMenuAns;
+    boolean isFinished;
+    
     public void menu(){
         AccountController ac = new AccountController();
+        isFinished = false;
+        startMenuAns = "";
         //Viewer v = new Viewer();
         //AccountViewer av = new AccountViewer();
         //String startMenuAns = "";
@@ -24,6 +27,8 @@ public class MainController {
         while (!isFinished) {
             // Display the start menu and get the user's choice
             startMenuAns = v.displayStartMenu();
+            String name;
+            String password;
 
             switch (startMenuAns) {
                 // Create account
@@ -49,38 +54,39 @@ public class MainController {
                     name = av.displayPrompt("Enter name: ");
                     password = av.displayPrompt("Enter password: ");
                     WarPlayer player = ac.authenticateWarPlayer(name, password);
-                    if (player != null) {
-                        System.out.println("Login successful. Welcome, " + player.getName());
-                        boolean isPlayerMenuActive = true;
-                        while (isPlayerMenuActive) {
-                            String playerMenuAns = v.displayPlayerMenu();
-                            switch (playerMenuAns) {
-                                // Start game
-                                case "1":
-                                    WarPlayer comp = new WarPlayer("computerPlayer", "1234");
-                                    WarGame game = new WarGame(comp, player);
-                                    game.deal();
-                                    game.playGame();
-                                    break;
-
-                                // View scores
-                                case "2":
-                                    av.viewPlayerScores();
-                                    break;
-
-                                // Log out
-                                case "3":
-                                    player = ac.logout();
-                                    isPlayerMenuActive = false;
-                                    
-                                    break;
-
-                                // Invalid option in player menu
-                                default:
-                                    System.out.println("Invalid option. Please try again.");
-                            }
-                        }
-                    }
+//                    if (player != null) {
+//                        System.out.println("Login successful. Welcome, " + player.getName());
+//                        boolean isPlayerMenuActive = true;
+//                        while (isPlayerMenuActive) {
+//                            String playerMenuAns = v.displayPlayerMenu();
+//                            switch (playerMenuAns) {
+//                                // Start game
+//                                case "1":
+//                                    WarPlayer comp = new WarPlayer("computerPlayer", "1234");
+//                                    WarGame game = new WarGame(comp, player);
+//                                    game.deal();
+//                                    game.playGame();
+//                                    break;
+//
+//                                // View scores
+//                                case "2":
+//                                    av.viewPlayerScores();
+//                                    break;
+//
+//                                // Log out
+//                                case "3":
+//                                    player = ac.logout();
+//                                    isPlayerMenuActive = false;
+//                                    
+//                                    break;
+//
+//                                // Invalid option in player menu
+//                                default:
+//                                    System.out.println("Invalid option. Please try again.");
+//                            }
+//                        }
+//                    }
+                    login(player);
                     break;
 
                 // Read instructions
@@ -121,10 +127,47 @@ public class MainController {
             }
     }
     
-    public void login() {}
+    public void login(WarPlayer player) {
+        if (player != null) {
+            System.out.println("Login successful. Welcome, " + player.getName());
+            boolean isPlayerMenuActive = true;
+            while (isPlayerMenuActive) {
+                String playerMenuAns = v.displayPlayerMenu();
+                switch (playerMenuAns) {
+                                // Start game
+                                case "1":
+                                    WarPlayer comp = new WarPlayer("computerPlayer", "1234");
+                                    WarGame game = new WarGame(comp, player);
+                                    game.deal();
+                                    game.playGame();
+                                    break;
+
+                                // View scores
+                                case "2":
+                                    av.viewPlayerScores();
+                                    break;
+
+                                // Log out
+                                case "3":
+                                    player = ac.logout();
+                                    isPlayerMenuActive = false;
+                                    
+                                    break;
+
+                                // Invalid option in player menu
+                                default:
+                                    System.out.println("Invalid option. Please try again.");
+                            }
+                        }
+                    }}
     
     public void gameInstruction() {
         v.readInstruction();
+    }
+    
+    public void playerMenuOption(String playerMenuAns) {
+        boolean isPlayerMenuActive = true;
+        while (isPlayerMenuActive) {}
     }
     
     public void exitGame() {
