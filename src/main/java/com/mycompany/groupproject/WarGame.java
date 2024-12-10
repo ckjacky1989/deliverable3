@@ -147,6 +147,9 @@ public class WarGame extends Game{
             System.out.println("Invalid input. Defaulting to 50 rounds.");
             maxRound = 50;
         }
+        //Handle cases if entered maxRound is <=0
+        if (maxRound<=0){
+            maxRound = 50;}
         while (!isEnd && round < maxRound) {
             round++;
             if (goOnInput.equals("1")){
