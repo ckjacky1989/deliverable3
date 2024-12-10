@@ -134,32 +134,33 @@ public class MainController {
             while (isPlayerMenuActive) {
                 String playerMenuAns = v.displayPlayerMenu();
                 switch (playerMenuAns) {
-                                // Start game
-                                case "1":
-                                    WarPlayer comp = new WarPlayer("computerPlayer", "1234");
-                                    WarGame game = new WarGame(comp, player);
-                                    game.deal();
-                                    game.playGame();
-                                    break;
+                    // Start game
+                    case "1":
+                        WarPlayer comp = new WarPlayer("computerPlayer", "1234");
+                        WarGame game = new WarGame(comp, player);
+                        game.deal();
+                        game.playGame();
+                        break;
 
-                                // View scores
-                                case "2":
-                                    av.viewPlayerScores();
-                                    break;
+                    // View scores
+                    case "2":
+                        av.viewPlayerScores();
+                        break;
 
-                                // Log out
-                                case "3":
-                                    player = ac.logout();
-                                    isPlayerMenuActive = false;
+                    // Log out
+                    case "3":
+                        player = ac.logout();
+                        isPlayerMenuActive = false;
                                     
-                                    break;
+                        break;
 
-                                // Invalid option in player menu
-                                default:
-                                    System.out.println("Invalid option. Please try again.");
+                    // Invalid option in player menu
+                    default:
+                        System.out.println("Invalid option. Please try again.");
                             }
                         }
-                    }}
+        }
+    }
     
     public void gameInstruction() {
         v.readInstruction();
