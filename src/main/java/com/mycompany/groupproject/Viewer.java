@@ -37,15 +37,19 @@ public class Viewer {
      public String readInstruction(){
         System.out.println("Game Instruction");
         System.out.println();
+        System.out.println("Before the game starts, the player needs to enter the maximum rounds he/she ");
+        System.out.println("is willing to play. Default 50 rounds. ");
         System.out.println("After the game starts, the player will get 26 random cards. ");
-        System.out.println("Before each round, the player can choose to press 1 for starting a round ");
-        System.out.println("or 2 for surrendering. After a new round starts, the rank of the first card");
-        System.out.println("of each player will be compared, the winner of that round can get both cards.");
+        System.out.println("Before each round, the player can choose to press 1 for starting a round, ");
+        System.out.println("2 for surrendering, or other inputs for auto mode. ");
+        System.out.println("After a new round starts, the rank of the first card of each player ");
+        System.out.println("will be compared, the winner of that round can get both cards.");
         System.out.println("If the ranks are the same, compare the rank of the third card of each player,");
         System.out.println("the winner of that round can get 6 cards. If the ranks are the same again,");
         System.out.println("compare the 2n+1 cards until the ranks are different or no more cards can be ");
         System.out.println("compared, where n is the number of times having the same rank. Repeat the rounds");
-        System.out.println("until there is a player having all 52 cards. It will declare the winner");
+        System.out.println("until there is a player having all 52 cards or until the max round. ");
+        System.out.println("It will declare the winner and the game ends.");
         System.out.println("");
         System.out.println("Input any key to go back to Start menu");
         Scanner myObj = new Scanner(System.in);

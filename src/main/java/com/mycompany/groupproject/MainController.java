@@ -19,10 +19,6 @@ public class MainController {
         AccountController ac = new AccountController();
         isFinished = false;
         startMenuAns = "";
-        //Viewer v = new Viewer();
-        //AccountViewer av = new AccountViewer();
-        //String startMenuAns = "";
-        //boolean isFinished = false;
 
         while (!isFinished) {
             // Display the start menu and get the user's choice
@@ -33,19 +29,6 @@ public class MainController {
             switch (startMenuAns) {
                 // Create account
                 case "1":
-//                    String name = av.displayPrompt("Enter name: ");
-//                    String password = av.displayPrompt("Enter password: ");
-//                    String confirmedPw = av.displayPrompt("Enter password again: ");
-//                    if (password.equals(confirmedPw)) {
-//                        WarPlayer newPlayer = ac.registerWarPlayer(name, password);
-//                        if (newPlayer != null) {
-//                            System.out.println("Account created successfully.");
-//                        } else {
-//                            System.out.println("Account creation failed. Player may already exist.");
-//                        }
-//                    } else {
-//                        System.out.println("Passwords do not match.");
-//                    }
                     createAccount();
                     break;
 
@@ -54,51 +37,17 @@ public class MainController {
                     name = av.displayPrompt("Enter name: ");
                     password = av.displayPrompt("Enter password: ");
                     WarPlayer player = ac.authenticateWarPlayer(name, password);
-//                    if (player != null) {
-//                        System.out.println("Login successful. Welcome, " + player.getName());
-//                        boolean isPlayerMenuActive = true;
-//                        while (isPlayerMenuActive) {
-//                            String playerMenuAns = v.displayPlayerMenu();
-//                            switch (playerMenuAns) {
-//                                // Start game
-//                                case "1":
-//                                    WarPlayer comp = new WarPlayer("computerPlayer", "1234");
-//                                    WarGame game = new WarGame(comp, player);
-//                                    game.deal();
-//                                    game.playGame();
-//                                    break;
-//
-//                                // View scores
-//                                case "2":
-//                                    av.viewPlayerScores();
-//                                    break;
-//
-//                                // Log out
-//                                case "3":
-//                                    player = ac.logout();
-//                                    isPlayerMenuActive = false;
-//                                    
-//                                    break;
-//
-//                                // Invalid option in player menu
-//                                default:
-//                                    System.out.println("Invalid option. Please try again.");
-//                            }
-//                        }
-//                    }
+
                     login(player);
                     break;
 
                 // Read instructions
                 case "3":
-//                    v.readInstruction();
                     gameInstruction();
                     break;
 
                 // Exit program
                 case "4":
-//                    System.out.println("Thank you for using the War Game application. Goodbye!");
-//                    isFinished = true;
                     exitGame();
                     break;
 
